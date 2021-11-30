@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class WaypointPatrol : MonoBehaviour
 {
+    Animator m_Animator;
     public NavMeshAgent navMeshAgent;
     public Transform[] waypoints;
 
@@ -12,6 +13,7 @@ public class WaypointPatrol : MonoBehaviour
 
     void Start ()
     {
+	m_Animator = GetComponent<Animator> ();
         navMeshAgent.SetDestination (waypoints[0].position);
     }
 
@@ -21,6 +23,7 @@ public class WaypointPatrol : MonoBehaviour
         {
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
             navMeshAgent.SetDestination (waypoints[m_CurrentWaypointIndex].position);
+	    m_Animator.SetBool ("IsWalking", true);
         }
     }
 }
