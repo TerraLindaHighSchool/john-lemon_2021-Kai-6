@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float turnSpeed = 20f;
-
+    public Transform Cam;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
@@ -24,9 +24,9 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis ("Horizontal");
         float vertical = Input.GetAxis ("Vertical");
         
-        m_Movement.Set(horizontal, 0f, vertical);
+        m_Movement.Set(horizontal * transform.forward.x, 0f, vertical * transform.forward.z);
         m_Movement.Normalize ();
-
+        print(m_Movement);
         bool hasHorizontalInput = !Mathf.Approximately (horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately (vertical, 0f);
         bool isWalking = hasHorizontalInput || hasVerticalInput;
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (isWalking)
         {
+            transform.Translate(m_Movement * Time.deltaTime);
             if (!m_AudioSource.isPlaying)
             {
                 m_AudioSource.Play();
@@ -43,14 +44,8 @@ public class PlayerMovement : MonoBehaviour
         {
             m_AudioSource.Stop ();
         }
-
-        Vector3 desiredForward = Vector3.RotateTowards (transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
-        m_Rotation = Quaternion.LookRotation (desiredForward);
-    }
-
-    void OnAnimatorMove ()
-    {
-        m_Rigidbody.MovePosition (m_Rigidbody.position + m_Movement * m_Animator.deltaPosition.magnitude);
-        m_Rigidbody.MoveRotation (m_Rotation);
+        Quaternion targetRot = Quaternion.identity;
+        targetRot.eulerAngles = new Vector3(0f, Cam.rotation.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, 360f);
     }
 }
