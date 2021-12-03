@@ -1325,9 +1325,9 @@ MonoBehaviour:
   displayImageDuration: 1
   player: {fileID: 8531912294777433499}
   exitBackgroundImageCanvasGroup: {fileID: 633682337}
-  exitAudio: {fileID: 47882766}
-  caughtBackgroundImageCanvasGroup: {fileID: 2004576019}
-  caughtAudio: {fileID: 1521156610}
+  exitAudio: {fileID: 0}
+  caughtBackgroundImageCanvasGroup: {fileID: 0}
+  caughtAudio: {fileID: 0}
 --- !u!65 &1157984241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1911,14 +1911,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c17d2f961ce67a42ad516f33c6f24d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 0
-  sensitivityX: 15
-  sensitivityY: 15
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
-  frameCounter: 20
+  player: {fileID: 40093232}
+  turnSpeed: 4
+  moveSpeed: 2
+  minTurnAngle: -90
+  maxTurnAngle: 90
 --- !u!20 &1525545884
 Camera:
   m_ObjectHideFlags: 0
@@ -1969,8 +1966,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525545882}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.8, y: 1.334, z: -3.254}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.8, y: 1.16, z: -3.176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5846,7 +5843,12 @@ PrefabInstance:
     - target: {fileID: 221389026676098823, guid: 3cb3e30768918f6488aad62dc1368293,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 221389026676098823, guid: 3cb3e30768918f6488aad62dc1368293,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1413123950163952147, guid: 3cb3e30768918f6488aad62dc1368293,
         type: 3}
@@ -5857,6 +5859,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ApplyRootMotion
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413123950168210643, guid: 3cb3e30768918f6488aad62dc1368293,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1413123950170893819, guid: 3cb3e30768918f6488aad62dc1368293,
         type: 3}

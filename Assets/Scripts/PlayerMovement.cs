@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float turnSpeed = 20f;
+    public float moveSpeed = 1;
     public Transform Cam;
     Animator m_Animator;
     Rigidbody m_Rigidbody;
@@ -23,18 +23,18 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxis ("Horizontal");
         float vertical = Input.GetAxis ("Vertical");
-        
+
         m_Movement.Set(horizontal * transform.forward.x, 0f, vertical * transform.forward.z);
         m_Movement.Normalize ();
         print(m_Movement);
+        print(vertical);
         bool hasHorizontalInput = !Mathf.Approximately (horizontal, 0f);
         bool hasVerticalInput = !Mathf.Approximately (vertical, 0f);
         bool isWalking = hasHorizontalInput || hasVerticalInput;
-        m_Animator.SetBool ("IsWalking", isWalking);
-        
+
         if (isWalking)
         {
-            transform.Translate(m_Movement * Time.deltaTime);
+            transform.Translate(m_Movement * moveSpeed * Time.deltaTime);
             if (!m_AudioSource.isPlaying)
             {
                 m_AudioSource.Play();
