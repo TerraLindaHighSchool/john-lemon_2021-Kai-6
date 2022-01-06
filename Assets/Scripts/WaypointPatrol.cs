@@ -14,15 +14,19 @@ public class WaypointPatrol : MonoBehaviour
     void Start ()
     {
 	m_Animator = GetComponent<Animator> ();
-        navMeshAgent.SetDestination (waypoints[0].position);
+        navMeshAgent.destination = (waypoints[1].position);
     }
 
     void Update ()
     {
         if(navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
         {
-            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-            navMeshAgent.SetDestination (waypoints[m_CurrentWaypointIndex].position);
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex+1) % waypoints.Length;
+            navMeshAgent.destination = waypoints[m_CurrentWaypointIndex].position;
+        } 
+        else
+        {
+            return;
         }
     }
 }
